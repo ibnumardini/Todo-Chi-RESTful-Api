@@ -1,0 +1,9 @@
+FROM golang:1.22-alpine
+
+RUN apk update
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go install github.com/cosmtrek/air@latest && go mod download

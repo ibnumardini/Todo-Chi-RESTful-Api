@@ -1,7 +1,7 @@
 package todo
 
 type Service interface {
-	FindAll() ([]Todo, error)
+	FindAll() ([]TodoResponse, error)
 }
 
 type service struct {
@@ -12,6 +12,25 @@ func newService(repo *repo) service {
 	return service{repo}
 }
 
-func (s *service) FindAll() ([]Todo, error) {
-	return s.repo.FindAll()
+func (s *service) FindAll() ([]TodoResponse, error) {
+	todos, err := s.repo.FindAll()
+	if err != nil {
+		return nil, err
+	}
+
+	response := []TodoResponse{}
+
+	for _, todo := range todos {
+		newResponse := TodoResponse{
+			Id:        todo.Id,
+			Task:      todo.Task,
+			Note:      todo.Note.String,
+			DoneAt:    todo.DoneAt.Time,
+			CreatedAt: todo.CreatedAt,
+		}
+
+		response = append(response, newResponse)
+	}
+
+	return response, nil
 }

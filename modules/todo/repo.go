@@ -17,9 +17,10 @@ func newRepo(db *sqlx.DB) repo {
 func (r *repo) FindAll() ([]Todo, error) {
 	var todos []Todo
 
-	todos = append(todos, Todo{
-		Task: "halo",
-	})
+	err := r.db.Select(&todos, "SELECT * FROM tasks")
+	if err != nil {
+		return nil, err
+	}
 
 	return todos, nil
 }

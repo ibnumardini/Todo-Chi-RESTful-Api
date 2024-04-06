@@ -21,7 +21,7 @@ type dbConfig struct {
 }
 
 func (db *dbConfig) ConnStr() string {
-	return fmt.Sprintf("%s:%s@(%s:%d)/%s", db.User, db.Pass, db.Host, db.Port, db.Name)
+	return fmt.Sprintf("%s:%s@(%s:%d)/%s?parseTime=true", db.User, db.Pass, db.Host, db.Port, db.Name)
 }
 
 type config struct {

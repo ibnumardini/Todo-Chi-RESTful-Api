@@ -37,7 +37,7 @@ func main() {
 
 	server := http.Server{
 		Handler: r,
-		Addr:    fmt.Sprintf("%s:%d", config.C.Server.AppHost, config.C.Db.Port),
+		Addr:    fmt.Sprintf("%s:%d", config.C.Server.AppHost, config.C.Server.AppPort),
 	}
 
 	log.Info().Msg("starting up server...")
